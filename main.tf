@@ -38,10 +38,14 @@ module "network" {
       az         = "ap-northeast-2b"
       cidr_block = cidrsubnet("10.0.0.0/20", 3, 1)
     }
-    # redis = {
-    #   az         = "ap-northeast-2a"
-    #   cidr_block = cidrsubnet("10.0.0.0/20", 3, 1)
-    # }
+    redis = {
+      az         = "ap-northeast-2a"
+      cidr_block = cidrsubnet("10.0.0.0/20", 3, 2)
+    }
+    mongo = {
+      az         = "ap-northeast-2a"
+      cidr_block = cidrsubnet("10.0.0.0/20", 3, 3)
+    }
   }
 
   enable_dns_hostnames = true
