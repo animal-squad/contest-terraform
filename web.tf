@@ -55,6 +55,7 @@ module "web_alb" {
   source  = "app.terraform.io/animal-squad/elb/aws"
   version = "1.0.7"
 
+  #FIXME: 유일성을 확보하기 위해 이름을 수정해야 함 "${local.name}-web" 정도로 바꾸면 될 것 같음
   name = local.name
 
   certificate_arn = "arn:aws:acm:ap-northeast-2:015224529527:certificate/dc708e49-3eb0-4991-aded-20152719dc0b"
