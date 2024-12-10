@@ -46,6 +46,14 @@ module "network" {
       az         = "ap-northeast-2a"
       cidr_block = cidrsubnet("10.0.0.0/20", 3, 3)
     }
+    server_0 = {
+      az         = "ap-northeast-2a"
+      cidr_block = cidrsubnet("10.0.0.0/20", 3, 4)
+    }
+    server_1 = {
+      az         = "ap-northeast-2b"
+      cidr_block = cidrsubnet("10.0.0.0/20", 3, 5)
+    }
   }
 
   enable_dns_hostnames = true
