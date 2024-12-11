@@ -53,10 +53,10 @@ module "instance_web" {
 
 module "web_alb" {
   source  = "app.terraform.io/animal-squad/elb/aws"
-  version = "1.0.7"
+  version = "1.0.8"
 
   #FIXME: 유일성을 확보하기 위해 이름을 수정해야 함 "${local.name}-web" 정도로 바꾸면 될 것 같음
-  name = local.name
+  name = "${local.name}-service"
 
   certificate_arn = "arn:aws:acm:ap-northeast-2:015224529527:certificate/dc708e49-3eb0-4991-aded-20152719dc0b"
 
@@ -79,6 +79,32 @@ module "web_alb" {
       target_group_key = "web"
       target_id        = module.instance_web.web_1.instance_id
       port             = 3000
+    }
+  }
+
+  https_listener_rules = {
+    server = {
+      path     = ["/api"]
+      host     = ["www.goorm-ktb-013.goorm.team"]
+      priority = 1
+    }
+  }
+  target_groups = {
+    server = {
+      health_check_path = "/health"
+      port              = 80
+    }
+  }
+  targets = {
+    server_0 = {
+      target_group_key = "server"
+      target_id        = module.instance_server.server_0.instance_id
+      port             = 5000
+    }
+    server_1 = {
+      target_group_key = "server"
+      target_id        = module.instance_server.server_1.instance_id
+      port             = 5000
     }
   }
 }

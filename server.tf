@@ -50,35 +50,3 @@ module "instance_server" {
 
   key_name = module.key_pair.name
 }
-
-module "server_alb" {
-  source  = "app.terraform.io/animal-squad/elb/aws"
-  version = "1.0.7"
-
-  name = "${local.name}-server"
-
-  certificate_arn = "arn:aws:acm:ap-northeast-2:015224529527:certificate/dc708e49-3eb0-4991-aded-20152719dc0b"
-
-  vpc_id     = module.network.vpc_id
-  subnet_ids = [module.network.public_subnets["server_0"].id, module.network.public_subnets["server_1"].id]
-
-  default_target_groups = {
-    server = {
-      health_check_path = "/health"
-      port              = 80
-    }
-  }
-
-  default_targets = {
-    server_0 = {
-      target_group_key = "server"
-      target_id        = module.instance_server.server_0.instance_id
-      port             = 5000
-    }
-    server_1 = {
-      target_group_key = "server"
-      target_id        = module.instance_server.server_1.instance_id
-      port             = 5000
-    }
-  }
-}
