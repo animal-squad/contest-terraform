@@ -40,10 +40,12 @@ module "security_group_for_kafka" {
 }
 
 module "kafka_instance" {
+  for_each = toset(["leader", "follower_0", "follower_1"])
+
   source  = "app.terraform.io/animal-squad/ec2/aws"
   version = "1.0.2"
 
-  name_prefix = "${local.name}-kafka-instance"
+  name_prefix = "${local.name}-kafka-instance-${each.key}"
 
   ami           = "ami-0d81776ee23e75c00" # Amazon Linux 2023 x86_64 with docker
   az            = "ap-northeast-2a"
