@@ -24,10 +24,10 @@ module "security_group_server" {
 
 module "instance_server" {
   for_each = {
-    server_0 = {
+    service_0 = {
       az = "ap-northeast-2a"
     }
-    server_1 = {
+    service_1 = {
       az = "ap-northeast-2b"
     }
   }
@@ -35,7 +35,7 @@ module "instance_server" {
   source  = "app.terraform.io/animal-squad/ec2/aws"
   version = "1.0.2"
 
-  name_prefix = "${local.name}-instance-${each.key}"
+  name_prefix = "${local.name}-instance-server-${each.key}"
 
   ami           = "ami-0d81776ee23e75c00" # Amazon Linux 2023 x86_64 with docker
   az            = each.value.az

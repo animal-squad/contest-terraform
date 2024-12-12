@@ -32,7 +32,7 @@ module "redis_instance" {
   instance_type = "t3.small"
 
   security_group_ids          = [module.security_group_for_redis.id]
-  subnet_id                   = module.network.public_subnets["redis"].id
+  subnet_id                   = module.network.public_subnets["storage_0"].id
   vpc_id                      = module.network.vpc_id
   associate_public_ip_address = true
 
@@ -75,7 +75,7 @@ module "mongo_instance" {
   instance_type = "t3.small"
 
   security_group_ids          = [module.security_group_for_mongo.id]
-  subnet_id                   = module.network.public_subnets["mongo"].id
+  subnet_id                   = module.network.public_subnets["storage_0"].id
   vpc_id                      = module.network.vpc_id
   associate_public_ip_address = true
 

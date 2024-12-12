@@ -30,29 +30,17 @@ module "network" {
   vpc_cidr_block = "10.0.0.0/20"
 
   public_subnet = {
-    web_0 = {
+    service_0 = {
       az         = "ap-northeast-2a"
       cidr_block = cidrsubnet("10.0.0.0/20", 3, 0)
     }
-    web_1 = {
+    service_1 = {
       az         = "ap-northeast-2b"
       cidr_block = cidrsubnet("10.0.0.0/20", 3, 1)
     }
-    redis = {
+    storage_0 = {
       az         = "ap-northeast-2a"
       cidr_block = cidrsubnet("10.0.0.0/20", 3, 2)
-    }
-    mongo = {
-      az         = "ap-northeast-2a"
-      cidr_block = cidrsubnet("10.0.0.0/20", 3, 3)
-    }
-    server_0 = {
-      az         = "ap-northeast-2a"
-      cidr_block = cidrsubnet("10.0.0.0/20", 3, 4)
-    }
-    server_1 = {
-      az         = "ap-northeast-2b"
-      cidr_block = cidrsubnet("10.0.0.0/20", 3, 5)
     }
     kafka = {
       az         = "ap-northeast-2a"
